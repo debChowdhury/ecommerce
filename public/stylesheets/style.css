@@ -1,0 +1,35 @@
+body{
+  margin: 10px;
+  font-family: 'Cormorant Garamond', serif;
+}
+#overlay {
+  background: #ffffff;
+  color: #666666;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 5000;
+  top: 0;
+  left: 0;
+  float: left;
+  text-align: center;
+  padding-top: 25%;
+  opacity: .80;
+}
+#bodyDiv{
+  display: flex;
+  justify-content: flex-start;
+}
+#contentDiv{
+  width: 100%;
+  margin: 20px;
+}
+
+#contentDivForm{
+  width: 50%;
+  margin: 20px;
+}
+
+.btn{
+  margin:5px
+}

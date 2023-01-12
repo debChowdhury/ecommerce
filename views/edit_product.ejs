@@ -1,0 +1,57 @@
+<div id="bodyDiv">
+    <div id="contentDivForm">
+        <%- include('_spinner_overlay') %>
+        <h3>Edit product</h3>
+        <!-- form to edit a product -->
+        <form action="/editProduct" method="post" id="editProduct">
+            <div class="mb-3">
+                <label class="form-label">Product name</label>
+                <input type="text" name="name" value="<%= product.name %>" class="form-control" placeholder="Enter product name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Product quantity</label>
+                <input type="number" name="quantity" value="<%= product.quantity %>" class="form-control" placeholder="Enter product quantity" required>
+            </div>
+            <input type="hidden" name="productId" value="<%= product.id %>">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+
+     
+<script>
+    let toastS = new bootstrap.Toast($('#toast-success'));
+    let toastSBody = $('#toast-success-body');
+    let toastE = new bootstrap.Toast($('#toast-error'));
+    let toastEBody = $('#toast-error-body');
+    // editing a product
+    $("#editProduct").on("submit", function (event) {
+        event.preventDefault();
+        $('#overlay').fadeIn();
+        var form = $(this);
+        $.ajax({
+            url: form.attr('action'), 
+            type: "POST",
+            data: form.serialize(), 
+            success: function(result){
+                
+                $('#overlay').fadeOut();
+                if(result.status == 'success'){
+                    toastSBody.text(result.msg);
+                    toastS.show();
+                    window.location.href = "/";
+                }
+                else{
+                    toastEBody.text(result.msg);
+                    toastE.show();
+                }
+                
+            },
+            error: function(result){
+                $('#overlay').fadeOut();
+                toastEBody.text(result.msg);
+                toastE.show();
+            }
+        });
+    });
+</script>
